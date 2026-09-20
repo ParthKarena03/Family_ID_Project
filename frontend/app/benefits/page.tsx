@@ -1,0 +1,9 @@
+import PageHeader from "@/components/layout/PageHeader";
+import Card from "@/components/ui/Card";
+import Badge from "@/components/ui/Badge";
+import { benefits } from "@/lib/mock-data";
+import { formatCurrency } from "@/lib/utils";
+
+export default function BenefitsPage() {
+  return <div><PageHeader title="Benefits" description="Track financial and non-financial benefits delivered to families." /><div className="mb-6 grid gap-5 md:grid-cols-3"><Card className="p-5"><p className="text-sm text-slate-500">Total Distributed</p><p className="mt-2 text-2xl font-bold">₹48.6 Cr</p></Card><Card className="p-5"><p className="text-sm text-slate-500">Benefits Delivered</p><p className="mt-2 text-2xl font-bold">76,420</p></Card><Card className="p-5"><p className="text-sm text-slate-500">Processing</p><p className="mt-2 text-2xl font-bold">2,831</p></Card></div><Card className="overflow-hidden"><div className="overflow-x-auto"><table className="w-full min-w-[700px] text-left"><thead className="bg-slate-50 text-xs uppercase text-slate-500"><tr><th className="px-6 py-4">Family ID</th><th className="px-6 py-4">Scheme</th><th className="px-6 py-4">Amount</th><th className="px-6 py-4">Date</th><th className="px-6 py-4">Status</th></tr></thead><tbody className="divide-y divide-slate-100">{benefits.map((benefit) => <tr key={benefit.id}><td className="px-6 py-5 text-sm font-semibold text-blue-700">{benefit.familyId}</td><td className="px-6 py-5 text-sm">{benefit.scheme}</td><td className="px-6 py-5 text-sm font-semibold">{formatCurrency(benefit.amount)}</td><td className="px-6 py-5 text-sm text-slate-500">{benefit.date}</td><td className="px-6 py-5"><Badge type={benefit.status === "Disbursed" ? "success" : "warning"}>{benefit.status}</Badge></td></tr>)}</tbody></table></div></Card></div>;
+}
